@@ -1,6 +1,7 @@
 import { Box, Button, Center, Flex, Icon } from "@chakra-ui/react";
 import { Variants } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { MotionFlex } from "./Motion/Box.motion";
 
 const navbarVariants: Variants = {
@@ -36,15 +37,17 @@ export const Navbar = () => {
         marginX="8"
       >
         <Image src="/images/Logo.png" width={140} height={30} />
-        <Button
-          leftIcon={<Image width={24} height={24} src="/icons/disc.svg" />}
-          rounded={"full"}
-          px={5}
-          py={6}
-          variant="primary"
-        >
-          Get Started
-        </Button>
+        <Link href="signup">
+          <Button
+            leftIcon={<Image width={24} height={24} src="/icons/disc.svg" />}
+            rounded={"full"}
+            px={5}
+            py={6}
+            variant="primary"
+          >
+            Get Started
+          </Button>
+        </Link>
       </MotionFlex>
     </Center>
   );

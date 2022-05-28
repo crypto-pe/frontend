@@ -14,6 +14,7 @@ import { MotionBox } from "components/Motion/Box.motion";
 import { Navbar } from "components/Navbar.component";
 import { Variants } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const imgVariants: Variants = {
@@ -112,19 +113,21 @@ const Index = () => {
                   overflow="none"
                 />
               </InputGroup>
-              <Button
-                marginLeft="auto"
-                bgColor="primary.500"
-                size="lg"
-                borderRadius={"full"}
-                borderTopRightRadius="0"
-                marginTop={0}
-                _hover={{
-                  bgColor: "primary.600"
-                }}
-              >
-                Get Started
-              </Button>
+              <Link href={`/signup?email=${email}`}>
+                <Button
+                  marginLeft="auto"
+                  bgColor="primary.500"
+                  size="lg"
+                  borderRadius={"full"}
+                  borderTopRightRadius="0"
+                  marginTop={0}
+                  _hover={{
+                    bgColor: "primary.600"
+                  }}
+                >
+                  Get Started
+                </Button>
+              </Link>
             </VStack>
           </MotionBox>
         </Box>

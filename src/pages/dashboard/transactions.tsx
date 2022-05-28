@@ -1,10 +1,8 @@
 import {
-  Button,
   Container,
   Heading,
   HStack,
   Table,
-  TableCaption,
   TableContainer,
   Thead,
   Tr,

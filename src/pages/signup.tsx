@@ -4,16 +4,13 @@ import {
   Container as ChakraContainer,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   Heading,
-  Input,
-  Select,
-  Text
+  Input
 } from "@chakra-ui/react";
 import { Container } from "components/Container.component";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import { useSession } from "store/account";
@@ -35,7 +32,9 @@ export const SignUpPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setError
+    setError,
+    setValue,
+    setFocus
   } = useForm<SignUpFormInput>();
 
   const handleSignUp = async (data: SignUpFormInput) => {
@@ -51,6 +50,16 @@ export const SignUpPage = () => {
       }
     }
   };
+
+  useEffect(() => {
+    console.log(router.query.email);
+    if (router.query.email && typeof router.query.email === "string") {
+      setValue("email", router.query.email);
+      setFocus("name");
+    } else {
+      setFocus("email");
+    }
+  }, [router.query.email]);
 
   useEffect(() => {
     if (account) {
