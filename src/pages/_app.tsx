@@ -4,6 +4,7 @@ import theme from "config/chakra.config";
 import { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { SEO } from "config/seo.config";
+import NextNProgress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -40,6 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         ]}
       />
       <ChakraProvider resetCSS theme={theme}>
+        <NextNProgress />
         <Component {...pageProps} />
       </ChakraProvider>
     </>
