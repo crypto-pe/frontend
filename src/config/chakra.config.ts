@@ -12,10 +12,16 @@ const Button: ComponentStyleConfig = {
   baseStyle: {
     borderRadius: 6,
     _focus: {
-      ring: 0
+      ring: "2px",
+      ringColor: "primary.500"
     }
   },
   variants: {
+    unstyled: {
+      _focus: {
+        ring: 0
+      }
+    },
     primary: {
       bg: "primary.500",
       color: "light",
@@ -62,6 +68,12 @@ const Input: ComponentStyleConfig = {
         // color: "light",
         _hover: {
           bg: "#3B4655"
+        },
+        _focus: {
+          ring: "1px",
+          ringColor: "primary.500",
+          ringOffset: "1px",
+          ringOffsetColor: "primary.600"
         }
       }
     }

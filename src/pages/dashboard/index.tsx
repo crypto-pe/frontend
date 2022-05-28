@@ -7,17 +7,14 @@ import {
 import {
   Box,
   Button,
-  Flex,
   Heading,
   Table,
-  TableCaption,
   TableContainer,
   Thead,
   Tr,
   Th,
   Td,
   Tbody,
-  Tfoot,
   Checkbox,
   HStack,
   Text,
@@ -27,6 +24,7 @@ import {
   MenuList,
   MenuItem
 } from "@chakra-ui/react";
+import { AddEmployee } from "components/AddEmployee/AddEmployee.component";
 import { DashboardLayout } from "layouts/dashboard.layout";
 import { NextPage } from "next";
 import Image from "next/image";
@@ -57,12 +55,15 @@ const EmployeData: { name: string; role: string; salary: number }[] = [
 const Dashboard: NextPage = () => {
   return (
     <DashboardLayout>
-      <Flex maxW="5xl" w="full" justifyContent={"space-between"}>
+      <HStack
+        maxW="5xl"
+        w="full"
+        justifyContent={"space-between"}
+        alignItems="flex-end"
+      >
         <Heading>Employees</Heading>
-        <Button variant="unstyled">
-          <Image src="/icons/user-plus.svg" width={32} height={32} />
-        </Button>
-      </Flex>
+        <AddEmployee />
+      </HStack>
       <Box mt={10}>
         <TableContainer>
           <Table variant="simple" colorScheme="whiteAlpha" w="full">
