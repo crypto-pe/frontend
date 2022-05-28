@@ -1,7 +1,13 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  AddIcon,
+  ArrowRightIcon,
+  CheckCircleIcon,
+  ChevronDownIcon
+} from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  Circle,
   Flex,
   HStack,
   Menu,
@@ -88,22 +94,25 @@ const TopBar = () => {
           py={2}
           rounded="full"
         >
-          Your Cats
+          Google
         </MenuButton>
         <MenuList bgColor="gray.700" borderColor="gray.800">
           <MenuItem
             minH="48px"
             _hover={{ bgColor: "gray.600" }}
             _focus={{ bgColor: "gray.500" }}
+            icon={<ArrowRightIcon />}
           >
-            <span>Fluffybuns the Destroyer</span>
+            <span>Macrosoft</span>
           </MenuItem>
+
           <MenuItem
             minH="40px"
             _hover={{ bgColor: "gray.600" }}
             _focus={{ bgColor: "gray.500" }}
+            icon={<AddIcon />}
           >
-            <span>Simon the pensive</span>
+            <span>New Organization</span>
           </MenuItem>
         </MenuList>
       </Menu>
