@@ -68,7 +68,7 @@ const Dashboard: NextPage = () => {
         <TableContainer>
           <Table variant="simple" colorScheme="whiteAlpha" w="full">
             <Thead>
-              <Tr borderColor={"red"}>
+              <Tr>
                 <Th>
                   <Checkbox />
                 </Th>

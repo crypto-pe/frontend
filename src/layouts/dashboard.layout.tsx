@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Container } from "components/Container.component";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
@@ -43,15 +44,21 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
 const Sidebar = () => {
   return (
     <VStack gap={12} mt={40} ml={6}>
-      <Button variant="unstyled">
-        <Image src="/icons/home.svg" width={45} height={45} />
-      </Button>
-      <Button variant="unstyled">
-        <Image src="/icons/history.svg" width={45} height={45} />
-      </Button>
-      <Button variant="unstyled">
-        <Image src="/icons/settings.svg" width={45} height={45} />
-      </Button>
+      <Link href="/dashboard">
+        <Button variant="unstyled">
+          <Image src="/icons/home.svg" width={45} height={45} />
+        </Button>
+      </Link>
+      <Link href="/dashboard/transactions">
+        <Button variant="unstyled">
+          <Image src="/icons/history.svg" width={45} height={45} />
+        </Button>
+      </Link>
+      <Link href="/dashboard/settings">
+        <Button variant="unstyled">
+          <Image src="/icons/settings.svg" width={45} height={45} />
+        </Button>
+      </Link>
     </VStack>
   );
 };
