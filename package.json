@@ -1,0 +1,46 @@
+{
+  "private": false,
+  "scripts": {
+    "dev": "next -p 8080",
+    "build": "next build",
+    "start": "next start -p 8080",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "gen:theme-typings": "chakra-cli tokens src/config/chakra.config.ts",
+    "postinstall": "yarn husky install && yarn run gen:theme-typings"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "1.8.8",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^6",
+    "next": "latest",
+    "next-seo": "^5.4.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-framer": "^0.0.2",
+    "zustand": "^4.0.0-rc.1"
+  },
+  "devDependencies": {
+    "@chakra-ui/cli": "^2.0.0",
+    "@types/node": "^14.6.0",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.30.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.2",
+    "prettier": "^2.6.2",
+    "typescript": "4.3.2"
+  },
+  "name": "nextjs-chakra-eslint-prettier-husky-zustand-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "milan090 <milanmuhammed1@gmail.com>",
+  "license": "MIT"
+}
