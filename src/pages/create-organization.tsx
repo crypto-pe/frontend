@@ -1,9 +1,7 @@
 import {
   Box,
-  Center,
   Heading,
   Input,
-  VStack,
   Container as ChakraContainer,
   Button,
   Select,

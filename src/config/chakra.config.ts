@@ -64,6 +64,12 @@ const Input: ComponentStyleConfig = {
   variants: {
     primary: {
       field: {
+        _invalid: {
+          ring: "1px",
+          ringColor: "red.500",
+          ringOffset: "1px",
+          ringOffsetColor: "red.600"
+        },
         bg: "slategray",
         // color: "light",
         _hover: {
