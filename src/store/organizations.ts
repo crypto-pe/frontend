@@ -9,6 +9,8 @@ interface OrganizationsStore {
   setCurrentOrgId: (newCurrentOrgId: string) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  isAdmin: boolean;
+  setIsAdmin: (isAdmin: boolean) => void;
 }
 
 export const useOrgnizationsStore = create(
@@ -19,7 +21,9 @@ export const useOrgnizationsStore = create(
       organizations: [],
       setOrganizations: organizations => set({ organizations }),
       loading: true,
-      setLoading: loading => set({ loading })
+      setLoading: loading => set({ loading }),
+      isAdmin: false,
+      setIsAdmin: isAdmin => set({ isAdmin })
     }),
     {
       name: "organizations-data",

@@ -5,10 +5,13 @@ import {
   FormControl,
   FormErrorMessage,
   Heading,
-  Input
+  Input,
+  Text,
+  Link as ChakraLink
 } from "@chakra-ui/react";
 import { Container } from "components/Container.component";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -23,8 +26,8 @@ interface SignUpFormInput {
 
 export const SignUpPage = () => {
   const router = useRouter();
-  const { account, setSession } = useSessionStore(state => ({
-    account: state.account,
+  const { jwt, setSession } = useSessionStore(state => ({
+    jwt: state.jwt,
     setSession: state.setSession
   }));
 
@@ -61,10 +64,10 @@ export const SignUpPage = () => {
   }, [router.query.email]);
 
   useEffect(() => {
-    if (account) {
+    if (jwt) {
       router.push("/dashboard");
     }
-  }, [account]);
+  }, [jwt]);
 
   return (
     <Container>
@@ -107,9 +110,15 @@ export const SignUpPage = () => {
             />
             <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
           </FormControl>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" mt={4}>
             Sign Up
           </Button>
+          <Text textAlign={"center"} mt={-2} color="gray.400">
+            Already have an account?{" "}
+            <Link href="/login">
+              <ChakraLink color="primary.500">Login</ChakraLink>
+            </Link>
+          </Text>
         </ChakraContainer>
       </ChakraContainer>
       <Box mt={"auto"} mb={-4}>

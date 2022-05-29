@@ -8,7 +8,7 @@ export const useCurrentOrganization = () => {
   ]);
 
   const currentOrg = organizations.find(org => org.id === currentOrgId);
-
+  console.log("Current Org", currentOrgId);
   if (!currentOrg)
     throw new Error(
       "Current Organization Id does not match any of the Organizations"

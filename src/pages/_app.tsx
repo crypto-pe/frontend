@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         client
           .getAccount({ address: data.account }, getAuthHeaders(jwt))
           .then(res => {
-            console.log(res);
+            console.log("Autheticated Successfully", res);
             setSession({ jwt, account: res.account });
           })
           .catch(err => console.log(err))

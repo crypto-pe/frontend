@@ -97,6 +97,18 @@ const Select: ComponentStyleConfig = {
         // color: "light",
         _hover: {
           bg: "#3B4655"
+        },
+        _focus: {
+          ring: "1px",
+          ringColor: "primary.500",
+          ringOffset: "1px",
+          ringOffsetColor: "primary.600"
+        },
+        _invalid: {
+          ring: "1px",
+          ringColor: "red.500",
+          ringOffset: "1px",
+          ringOffsetColor: "red.600"
         }
       }
     }

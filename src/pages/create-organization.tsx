@@ -12,9 +12,14 @@ import {
 import { Container } from "components/Container.component";
 import { NextPage } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useOrgnizationsStore } from "store/organizations";
+import { useSessionStore } from "store/session";
 import { TokenType } from "utils/api.gen";
 import client from "utils/client";
+import { getAuthHeaders } from "utils/jwt";
 
 interface CreateOrganizationInputs {
   name: string;
@@ -22,20 +27,42 @@ interface CreateOrganizationInputs {
 }
 
 const CreateOrganizationPage: NextPage = () => {
+  const router = useRouter();
+  const { organizations, setOrganizations, setCurrentOrgId } =
+    useOrgnizationsStore();
+  const jwt = useSessionStore(state => state.jwt);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-    setValue,
+
     setFocus
   } = useForm<CreateOrganizationInputs>();
   const handleCreateOrganization = async (data: CreateOrganizationInputs) => {
-    const organization = await client.createOrganization({
-      name: data.name,
-      token: data.token
-    });
+    try {
+      const res = await client.createOrganization(
+        {
+          name: data.name,
+          token: data.token
+        },
+        getAuthHeaders(jwt)
+      );
+
+      const newOrganizations = [...organizations, { ...res.organization }];
+      setOrganizations(newOrganizations);
+
+      setCurrentOrgId(res.organization.id);
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    setFocus("name");
+  }, []);
+
   return (
     <Container>
       <ChakraContainer maxW="container.xl" mt={6}>

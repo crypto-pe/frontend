@@ -1,7 +1,9 @@
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Button, Center } from "@chakra-ui/react";
 import { Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useSessionStore } from "store/session";
 import { MotionFlex } from "./Motion/Box.motion";
 
 const navbarVariants: Variants = {
@@ -19,6 +21,8 @@ const navbarVariants: Variants = {
 };
 
 export const Navbar = () => {
+  const account = useSessionStore(state => state.account);
+
   return (
     <Center w="100%">
       <MotionFlex
@@ -37,17 +41,31 @@ export const Navbar = () => {
         marginX="8"
       >
         <Image src="/images/Logo.png" width={140} height={30} />
-        <Link href="login">
-          <Button
-            leftIcon={<Image width={24} height={24} src="/icons/disc.svg" />}
-            rounded={"full"}
-            px={5}
-            py={6}
-            variant="primary"
-          >
-            Login
-          </Button>
-        </Link>
+        {account?.name ? (
+          <Link href="/dashboard">
+            <Button
+              rightIcon={<ChevronRightIcon />}
+              rounded={"full"}
+              px={5}
+              py={6}
+              variant="primary"
+            >
+              Dashboard
+            </Button>
+          </Link>
+        ) : (
+          <Link href="login">
+            <Button
+              leftIcon={<Image width={24} height={24} src="/icons/disc.svg" />}
+              rounded={"full"}
+              px={5}
+              py={6}
+              variant="primary"
+            >
+              Login
+            </Button>
+          </Link>
+        )}
       </MotionFlex>
     </Center>
   );

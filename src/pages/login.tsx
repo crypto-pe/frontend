@@ -2,20 +2,23 @@ import {
   Box,
   Button,
   Container as ChakraContainer,
-  Heading
+  Heading,
+  Text,
+  Link as ChakraLink
 } from "@chakra-ui/react";
 import { Container } from "components/Container.component";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSessionStore } from "store/session";
 
 import { login } from "utils/wallet";
 
-export const SignUpPage = () => {
+export const LoginPage = () => {
   const router = useRouter();
-  const { account, setSession } = useSessionStore(state => ({
-    account: state.account,
+  const { jwt, setSession } = useSessionStore(state => ({
+    jwt: state.jwt,
     setSession: state.setSession
   }));
 
@@ -25,10 +28,10 @@ export const SignUpPage = () => {
   };
 
   useEffect(() => {
-    if (account) {
+    if (jwt) {
       router.push("/dashboard");
     }
-  }, [account]);
+  }, [jwt]);
 
   return (
     <Container>
@@ -50,6 +53,12 @@ export const SignUpPage = () => {
             Connect Your Wallet
           </Button>
         </ChakraContainer>
+        <Text textAlign={"center"} mt={2} color="gray.400">
+          Don&apos;t have an account?{" "}
+          <Link href="/signup">
+            <ChakraLink color="primary.500">Sign Up</ChakraLink>
+          </Link>
+        </Text>
       </ChakraContainer>
       <Box mt={"auto"} mb={-4}>
         <Image src="/images/office.png" width={584} height={381} />
@@ -58,4 +67,4 @@ export const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default LoginPage;
