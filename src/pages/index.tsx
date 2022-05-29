@@ -140,6 +140,7 @@ const Index = () => {
           variants={imgVariants}
           initial="hidden"
           animate="visible"
+          shadow={"xl"}
         >
           <Image src="/images/home-demo.png" width={720} height={700} />
         </MotionBox>

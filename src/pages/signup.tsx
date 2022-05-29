@@ -10,7 +10,7 @@ import {
 import { Container } from "components/Container.component";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import { useSessionStore } from "store/session";
@@ -52,7 +52,6 @@ export const SignUpPage = () => {
   };
 
   useEffect(() => {
-    console.log(router.query.email);
     if (router.query.email && typeof router.query.email === "string") {
       setValue("email", router.query.email);
       setFocus("name");
