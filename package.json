@@ -43,7 +43,8 @@
     "husky": "^8.0.1",
     "lint-staged": "^12.4.2",
     "prettier": "^2.6.2",
-    "typescript": "4.3.2"
+    "typescript": "4.3.2",
+    "vercel": "^24.2.4"
   },
   "name": "nextjs-chakra-eslint-prettier-husky-zustand-template",
   "version": "1.0.0",
