@@ -1,5 +1,5 @@
 import fetch from "cross-fetch";
-import { API, GetSupportedTokensReturn } from "./api.gen";
+import { API, GetSupportedTokensReturn, LoginReturn } from "./api.gen";
 import { ethers } from "ethers";
 import {
   ETHAuth,
@@ -11,9 +11,8 @@ import {
   IsValidSignatureBytes32MagicValue
 } from "@0xsequence/ethauth";
 import { getSignature, initializeAccounts } from "./eth";
-import { setData } from "../utils/state";
-
-const client = new API("https://api.spongeboi.com", fetch);
+import Store from "utils/store";
+import Client from "./client";
 
 // client.ping().then(something => console.log(something));
 // client
@@ -48,19 +47,18 @@ export const getProofString = async () => {
   const proofString = await ethAuth.encodeProof(proof);
   console.log("proofStringReturned", proofString);
 
+  Store.setState({ ...Store.getState(), address });
   return proofString;
 };
 
 export const createNewAccount = async (name: string, email: string) => {
   const proofString = await getProofString();
 
-  const newAccount = await client.createAccount({
+  const newAccount = await Client.createAccount({
     ethAuthProofString: proofString,
     name,
     email
   });
-
-  setData({ jwtToken: newAccount.jwtToken });
 
   return newAccount;
 };
@@ -69,9 +67,11 @@ export const login = async () => {
   const proofString = await getProofString();
 
   try {
-    const account = await client.login({ ethAuthProofString: proofString });
+    const account: LoginReturn = await Client.login({
+      ethAuthProofString: proofString
+    });
 
-    setData({ jwtToken: account.jwtToken });
+    Store.setState({ ...Store.getState(), jwtToken: account.jwtToken });
     return account;
   } catch (error) {
     console.log(error);
