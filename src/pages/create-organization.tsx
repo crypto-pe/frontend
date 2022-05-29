@@ -13,7 +13,7 @@ import { Container } from "components/Container.component";
 import { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useOrgnizationsStore } from "store/organizations";
 import { useSessionStore } from "store/session";
@@ -39,8 +39,11 @@ const CreateOrganizationPage: NextPage = () => {
 
     setFocus
   } = useForm<CreateOrganizationInputs>();
+  const [loading, setLoading] = useState(false);
+
   const handleCreateOrganization = async (data: CreateOrganizationInputs) => {
     try {
+      setLoading(true);
       const res = await client.createOrganization(
         {
           name: data.name,
@@ -56,6 +59,8 @@ const CreateOrganizationPage: NextPage = () => {
       router.push("/dashboard");
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,7 +111,7 @@ const CreateOrganizationPage: NextPage = () => {
             </Text>
           </Box>
           {/* todo: add submit handler */}
-          <Button mt={4} variant="primary" type="submit">
+          <Button mt={4} variant="primary" type="submit" isLoading={loading}>
             Create Organization
           </Button>
         </ChakraContainer>

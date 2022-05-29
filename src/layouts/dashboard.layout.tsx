@@ -15,7 +15,7 @@ import { Container } from "components/Container.component";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useOrgnizationsStore } from "store/organizations";
 import { useSessionStore } from "store/session";
 
@@ -126,9 +126,19 @@ const Sidebar = () => {
 
 const TopBar = () => {
   const setSession = useSessionStore(state => state.setSession);
-  const { organizations } = useOrgnizationsStore(state => ({
-    organizations: state.organizations
-  }));
+  const { organizations, setCurrentOrgId, currentOrgId } = useOrgnizationsStore(
+    ({ setCurrentOrgId, organizations, currentOrgId }) => ({
+      organizations,
+      currentOrgId,
+      setCurrentOrgId
+    })
+  );
+
+  // Might cause errors if organizations change
+  const currentOrg = useMemo(
+    () => organizations.find(org => org.id === currentOrgId),
+    [currentOrgId, organizations]
+  );
 
   const handleLogout = () => {
     setSession({ jwt: "", account: undefined });
@@ -159,7 +169,7 @@ const TopBar = () => {
             py={2}
             rounded="full"
           >
-            Google
+            {currentOrg?.name}
           </MenuButton>
           <MenuList bgColor="gray.700" borderColor="gray.800">
             {organizations.map(({ id, name }) => (
@@ -169,6 +179,7 @@ const TopBar = () => {
                 _focus={{ bgColor: "gray.500" }}
                 icon={<ArrowRightIcon />}
                 key={id}
+                onClick={() => setCurrentOrgId(id)}
               >
                 <span>{name}</span>
               </MenuItem>
