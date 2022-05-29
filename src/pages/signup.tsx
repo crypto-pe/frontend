@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
-import { useSession } from "store/account";
+import { useSessionStore } from "store/session";
 import { createNewAccount } from "utils/wallet";
 
 interface SignUpFormInput {
@@ -23,7 +23,7 @@ interface SignUpFormInput {
 
 export const SignUpPage = () => {
   const router = useRouter();
-  const { account, setSession } = useSession(state => ({
+  const { account, setSession } = useSessionStore(state => ({
     account: state.account,
     setSession: state.setSession
   }));

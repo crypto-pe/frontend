@@ -11,10 +11,10 @@ export const getURL = (): string => {
 };
 
 const DEFAULT_TITLE = "Home";
-const DEFAULT_TITLE_TEMPLATE = "%s | Nextjs Template";
-const DEFAULT_DESCRIPTION = "Your Complete Nextjs Template!";
+const DEFAULT_TITLE_TEMPLATE = "%s | CryptoPe";
+const DEFAULT_DESCRIPTION = "Pay your employees with Crypto";
 const DEFAULT_CANONICAL = getURL();
-const SITE_NAME = "Nextjs Template";
+const SITE_NAME = "CryptoPe";
 const DEFAULT_OG_IMAGE = `${DEFAULT_CANONICAL}/images/preview.png`;
 const TWITTER_HANDLE = "";
 const TWITTER_CARD_TYPE = "summary_large_image";

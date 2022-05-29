@@ -7,14 +7,14 @@ import {
 import { Container } from "components/Container.component";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useSession } from "store/account";
+import { useEffect } from "react";
+import { useSessionStore } from "store/session";
 
 import { login } from "utils/wallet";
 
 export const SignUpPage = () => {
   const router = useRouter();
-  const { account, setSession } = useSession(state => ({
+  const { account, setSession } = useSessionStore(state => ({
     account: state.account,
     setSession: state.setSession
   }));

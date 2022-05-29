@@ -5,8 +5,39 @@ import { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { SEO } from "config/seo.config";
 import NextNProgress from "nextjs-progressbar";
+import { useSessionStore } from "store/session";
+import { useEffect } from "react";
+import jwtDecode from "jwt-decode";
+import { JwtTokenDecoded } from "types/JwtToken";
+import { getAuthHeaders } from "utils/jwt";
+import client from "utils/client";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { setSession, jwt, setLoading } = useSessionStore(state => state);
+
+  useEffect(() => {
+    if (jwt) {
+      console.log("Check");
+      const data = jwtDecode<JwtTokenDecoded>(jwt);
+
+      if (data) {
+        setLoading(true);
+        client
+          .getAccount({ address: data.account }, getAuthHeaders(jwt))
+          .then(res => {
+            console.log(res);
+            setSession({ jwt, account: res.account });
+          })
+          .catch(err => console.log(err))
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    } else {
+      setLoading(false);
+    }
+  }, [jwt]);
+
   return (
     <>
       <DefaultSeo

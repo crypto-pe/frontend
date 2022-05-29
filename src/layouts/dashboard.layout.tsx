@@ -1,15 +1,8 @@
-import {
-  AddIcon,
-  ArrowRightIcon,
-  CheckCircleIcon,
-  ChevronDownIcon
-} from "@chakra-ui/icons";
+import { AddIcon, ArrowRightIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  Circle,
   Flex,
-  HStack,
   Menu,
   MenuButton,
   MenuItem,
@@ -19,11 +12,44 @@ import {
 import { Container } from "components/Container.component";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { useOrgnizationsStore } from "store/organizations";
+import { useSessionStore } from "store/session";
+
+import client from "utils/client";
+import { getAuthHeaders } from "utils/jwt";
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
+  const { setCurrentOrgId, currentOrgId, setOrganizations } =
+    useOrgnizationsStore(state => state);
+  const jwt = useSessionStore(state => state.jwt);
+
+  useEffect(() => {
+    console.log(getAuthHeaders(jwt));
+    client
+      .getAllOrganizations(getAuthHeaders(jwt))
+      .then(res => {
+        console.log(res);
+        setOrganizations(res.organizations);
+        if (currentOrgId) {
+          const currentOrg = res.organizations.find(
+            org => org.id === currentOrgId
+          );
+          // Reset currentOrgId if its invalid (doesnt exist in db)
+          if (!currentOrg) {
+            setCurrentOrgId(
+              res.organizations.length ? res.organizations[0].id : ""
+            );
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [jwt]);
+
   return (
     <Container maxW="full">
       <Flex w="100%" color="light">
