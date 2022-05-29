@@ -37,7 +37,7 @@ export const Navbar = () => {
         marginX="8"
       >
         <Image src="/images/Logo.png" width={140} height={30} />
-        <Link href="signup">
+        <Link href="login">
           <Button
             leftIcon={<Image width={24} height={24} src="/icons/disc.svg" />}
             rounded={"full"}
@@ -45,7 +45,7 @@ export const Navbar = () => {
             py={6}
             variant="primary"
           >
-            Get Started
+            Login
           </Button>
         </Link>
       </MotionFlex>

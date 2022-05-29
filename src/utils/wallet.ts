@@ -11,6 +11,7 @@ import {
   IsValidSignatureBytes32MagicValue
 } from "@0xsequence/ethauth";
 import { getSignature, initializeAccounts } from "./eth";
+import { setData } from "../utils/state";
 
 const client = new API("https://api.spongeboi.com", fetch);
 
@@ -59,6 +60,8 @@ export const createNewAccount = async (name: string, email: string) => {
     email
   });
 
+  setData({ jwtToken: newAccount.jwtToken });
+
   return newAccount;
 };
 
@@ -66,7 +69,9 @@ export const login = async () => {
   const proofString = await getProofString();
 
   try {
-    const account = client.login({ ethAuthProofString: proofString });
+    const account = await client.login({ ethAuthProofString: proofString });
+
+    setData({ jwtToken: account.jwtToken });
     return account;
   } catch (error) {
     console.log(error);
