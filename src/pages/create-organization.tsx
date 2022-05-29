@@ -47,6 +47,7 @@ const CreateOrganizationPage: NextPage = () => {
               You can change this later
             </Text>
           </Box>
+          {/* todo: add submit handler */}
           <Button mt={4} variant="primary">
             Create Organization
           </Button>
